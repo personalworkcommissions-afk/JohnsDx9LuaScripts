@@ -703,6 +703,65 @@ function Lib:CreateWindow( params ) --// Title, FontColor, MainColor, Background
 
                     FooterWidth = FooterWidth + Toggle_Width + 12
                 end
+
+                --// RGB //--
+                if Win.FooterRGB then
+                    local RGB = "RGB: OFF"
+                    local RGB_Width = dx9.CalcTextWidth(RGB)
+                    if Win.Rainbow then RGB = "RGB: ON" end
+
+
+                    dx9.DrawBox( { FooterWidth + Win.Location[1] + 5 , Win.Location[2] + Win.Size[2] - 28 } , { FooterWidth + Win.Location[1] + 15 + RGB_Width , Win.Location[2] + Win.Size[2] - 4 } , Win.OutlineColor ) 
+
+                    if Win.RGBHovering then
+                        dx9.DrawBox( { FooterWidth + Win.Location[1] + 6 , Win.Location[2] + Win.Size[2] - 27 } , { FooterWidth + Win.Location[1] + 14 + RGB_Width , Win.Location[2] + Win.Size[2] - 5 } , Win.AccentColor ) 
+                    else
+                        dx9.DrawBox( { FooterWidth + Win.Location[1] + 6 , Win.Location[2] + Win.Size[2] - 27 } , { FooterWidth + Win.Location[1] + 14 + RGB_Width , Win.Location[2] + Win.Size[2] - 5 } , Lib.Black ) 
+                    end
+
+                    dx9.DrawFilledBox( { FooterWidth + Win.Location[1] + 7 , Win.Location[2] + Win.Size[2] - 26 } , { FooterWidth + Win.Location[1] + 13 + RGB_Width , Win.Location[2] + Win.Size[2] - 6 } , Win.BackgroundColor ) 
+
+                    dx9.DrawString( { FooterWidth + Win.Location[1] + 10 , Win.Location[2] + Win.Size[2] - 25 } , Win.FontColor , RGB)
+
+
+                    --// Click Detect
+                    if Lib.MouseInArea( { FooterWidth + Win.Location[1] + 5 , Win.Location[2] + Win.Size[2] - 28 , FooterWidth + Win.Location[1] + 15 + RGB_Width , Win.Location[2] + Win.Size[2] - 4 }, Win.DeadZone ) then
+                        
+                        --// Click Detection
+                        if dx9.isLeftClickHeld() then
+                            Win.RGBKeyHolding = true;
+                        else
+                            if Win.RGBKeyHolding then
+                                Win.Rainbow = not Win.Rainbow
+                                Win.RGBKeyHolding = false;
+                            end
+                        end
+
+                        --// Hover Detection
+                        Win.RGBHovering = true;
+                    else
+                        Win.RGBHovering = false;
+                        Win.RGBKeyHolding = false;
+                    end
+
+
+                    FooterWidth = FooterWidth + RGB_Width + 12
+                end
+
+                --// Mouse Coords //--
+                if Win.FooterMouseCoords then
+                    local Coords = "Mouse: "..dx9.GetMouse().x..", "..dx9.GetMouse().y
+                    local Coords_Width = dx9.CalcTextWidth(Coords)
+
+                    dx9.DrawBox( { FooterWidth + Win.Location[1] + 5 , Win.Location[2] + Win.Size[2] - 28 } , { FooterWidth + Win.Location[1] + 15 + Coords_Width , Win.Location[2] + Win.Size[2] - 4 } , Win.OutlineColor ) 
+                    dx9.DrawBox( { FooterWidth + Win.Location[1] + 6 , Win.Location[2] + Win.Size[2] - 27 } , { FooterWidth + Win.Location[1] + 14 + Coords_Width , Win.Location[2] + Win.Size[2] - 5 } , Lib.Black ) 
+                    dx9.DrawFilledBox( { FooterWidth + Win.Location[1] + 7 , Win.Location[2] + Win.Size[2] - 26 } , { FooterWidth + Win.Location[1] + 13 + Coords_Width , Win.Location[2] + Win.Size[2] - 6 } , Win.BackgroundColor ) 
+
+                    dx9.DrawString( { FooterWidth + Win.Location[1] + 10 , Win.Location[2] + Win.Size[2] - 25 } , Win.FontColor , Coords)
+                    FooterWidth = FooterWidth + 116 + 12
+                end
+
+                
             end
         end
     end
