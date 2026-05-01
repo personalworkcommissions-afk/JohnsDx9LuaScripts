@@ -25,25 +25,6 @@ Config = _G.Config or {
         color = { 0, 0, 255 };
 		distance_limit = 5000;
     };
-	enemies = {
-        enabled = true;
-        distance = true;
-        healthbar = true;
-		healthtag = false;
-		maxhealthtag = false;
-        nametag = true;
-        tracer = false;
-		color = { 255, 0, 0 };
-		distance_limit = 5000;
-    };
-	npcs = {
-		enabled = false;
-        distance = true;
-        nametag = true;
-        tracer = false;
-		color = { 255, 255, 255 };
-		distance_limit = 5000;
-	};
 }
 if _G.Config == nil then
 	_G.Config = Config
@@ -253,10 +234,9 @@ end
 
 Local_player_name = Get_local_player_name()
 
-Workspace_Live = dx9.FindFirstChild(Workspace, "Live")
-Workspace_NPCs = dx9.FindFirstChild(Workspace, "NPCs")
+Workspace_Live = dx9.FindFirstChild(Workspace)
 
-if Workspace_Live == nil or Workspace_Live == 0 or Workspace_NPCs == nil or Workspace_NPCs == 0 then
+if Workspace_Live == nil or Workspace_Live == 0 then
 	return false
 end
 
