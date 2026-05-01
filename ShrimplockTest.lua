@@ -81,7 +81,7 @@ local CFG = {
         {255,255,255}, {200,200,210}, {130,130,145}, {60,60,70},
     },
 
-    TABS = {"Players", "Settings"},
+    TABS = {"Players"},
 
     AIM_PARTS   = {
         "Head", "UpperTorso", "LowerTorso",
