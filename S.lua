@@ -630,14 +630,6 @@ function Lib:CreateWindow( params ) --// Title, FontColor, MainColor, Background
                 dx9.DrawString( { Win.Location[1] + 10 , Win.Location[2] + Win.Size[2] - 25 } , Lib.CurrentRainbowColor , Watermark)
                 FooterWidth = FooterWidth + Watermark_Width + 12
 
-                --// Epic Logo
-                local epic = Lib.LogoTick / 10
-
-                local TL = { Win.Location[1] + 12 + epic , Win.Location[2] + Win.Size[2] - 20 }
-                local TR = { Win.Location[1] + 20 , Win.Location[2] + Win.Size[2] - 20 + epic }
-                local BL = { Win.Location[1] + 12 , Win.Location[2] + Win.Size[2] - 12 - epic }
-                local BR = { Win.Location[1] + 20 - epic , Win.Location[2] + Win.Size[2] - 12 }
-
                 dx9.DrawLine({TL[1], TL[2]}, {TR[1], TR[2]}, Lib.CurrentRainbowColor) -- Top
                 dx9.DrawLine({BL[1], BL[2]}, {BR[1], BR[2]}, Lib.CurrentRainbowColor) -- Bottom
                 dx9.DrawLine({TR[1], TR[2]}, {BR[1], BR[2]}, Lib.CurrentRainbowColor) -- Right
@@ -703,65 +695,6 @@ function Lib:CreateWindow( params ) --// Title, FontColor, MainColor, Background
 
                     FooterWidth = FooterWidth + Toggle_Width + 12
                 end
-
-                --// RGB //--
-                if Win.FooterRGB then
-                    local RGB = "RGB: OFF"
-                    local RGB_Width = dx9.CalcTextWidth(RGB)
-                    if Win.Rainbow then RGB = "RGB: ON" end
-
-
-                    dx9.DrawBox( { FooterWidth + Win.Location[1] + 5 , Win.Location[2] + Win.Size[2] - 28 } , { FooterWidth + Win.Location[1] + 15 + RGB_Width , Win.Location[2] + Win.Size[2] - 4 } , Win.OutlineColor ) 
-
-                    if Win.RGBHovering then
-                        dx9.DrawBox( { FooterWidth + Win.Location[1] + 6 , Win.Location[2] + Win.Size[2] - 27 } , { FooterWidth + Win.Location[1] + 14 + RGB_Width , Win.Location[2] + Win.Size[2] - 5 } , Win.AccentColor ) 
-                    else
-                        dx9.DrawBox( { FooterWidth + Win.Location[1] + 6 , Win.Location[2] + Win.Size[2] - 27 } , { FooterWidth + Win.Location[1] + 14 + RGB_Width , Win.Location[2] + Win.Size[2] - 5 } , Lib.Black ) 
-                    end
-
-                    dx9.DrawFilledBox( { FooterWidth + Win.Location[1] + 7 , Win.Location[2] + Win.Size[2] - 26 } , { FooterWidth + Win.Location[1] + 13 + RGB_Width , Win.Location[2] + Win.Size[2] - 6 } , Win.BackgroundColor ) 
-
-                    dx9.DrawString( { FooterWidth + Win.Location[1] + 10 , Win.Location[2] + Win.Size[2] - 25 } , Win.FontColor , RGB)
-
-
-                    --// Click Detect
-                    if Lib.MouseInArea( { FooterWidth + Win.Location[1] + 5 , Win.Location[2] + Win.Size[2] - 28 , FooterWidth + Win.Location[1] + 15 + RGB_Width , Win.Location[2] + Win.Size[2] - 4 }, Win.DeadZone ) then
-                        
-                        --// Click Detection
-                        if dx9.isLeftClickHeld() then
-                            Win.RGBKeyHolding = true;
-                        else
-                            if Win.RGBKeyHolding then
-                                Win.Rainbow = not Win.Rainbow
-                                Win.RGBKeyHolding = false;
-                            end
-                        end
-
-                        --// Hover Detection
-                        Win.RGBHovering = true;
-                    else
-                        Win.RGBHovering = false;
-                        Win.RGBKeyHolding = false;
-                    end
-
-
-                    FooterWidth = FooterWidth + RGB_Width + 12
-                end
-
-                --// Mouse Coords //--
-                if Win.FooterMouseCoords then
-                    local Coords = "Mouse: "..dx9.GetMouse().x..", "..dx9.GetMouse().y
-                    local Coords_Width = dx9.CalcTextWidth(Coords)
-
-                    dx9.DrawBox( { FooterWidth + Win.Location[1] + 5 , Win.Location[2] + Win.Size[2] - 28 } , { FooterWidth + Win.Location[1] + 15 + Coords_Width , Win.Location[2] + Win.Size[2] - 4 } , Win.OutlineColor ) 
-                    dx9.DrawBox( { FooterWidth + Win.Location[1] + 6 , Win.Location[2] + Win.Size[2] - 27 } , { FooterWidth + Win.Location[1] + 14 + Coords_Width , Win.Location[2] + Win.Size[2] - 5 } , Lib.Black ) 
-                    dx9.DrawFilledBox( { FooterWidth + Win.Location[1] + 7 , Win.Location[2] + Win.Size[2] - 26 } , { FooterWidth + Win.Location[1] + 13 + Coords_Width , Win.Location[2] + Win.Size[2] - 6 } , Win.BackgroundColor ) 
-
-                    dx9.DrawString( { FooterWidth + Win.Location[1] + 10 , Win.Location[2] + Win.Size[2] - 25 } , Win.FontColor , Coords)
-                    FooterWidth = FooterWidth + 116 + 12
-                end
-
-                
             end
         end
     end
