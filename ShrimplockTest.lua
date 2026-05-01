@@ -1748,7 +1748,6 @@ local function tabSettings(T, mx, my, click, held)
     guiLabel("Aim Parts: 11 (Head..Foot)", T.dim)
     guiSep(T)
     guiLabel(CFG.SCRIPT_NAME .. " v" .. CFG.VERSION, T.acc)
-    guiLabel("Made by Lorthanyx", T.txt)
     guiLabel("DX9WARE Lua 5.1.4", T.dim)
 
     guiSep(T)
@@ -2734,3 +2733,4 @@ if not S.initialized then
     print("[WARZONE] ESP: Players, NPCs, Vehicles, Ammo, Spawner")
     print("")
 end
+
