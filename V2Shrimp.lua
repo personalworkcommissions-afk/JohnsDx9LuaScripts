@@ -15,14 +15,14 @@ Config = _G.Config or {
         tracer_type = 1; -- 1= "Near-Bottom", 2 = "Bottom", 3 = "Top", 4 = "Mouse"
     };
     players = {
-        enabled = true;
-        distance = true;
-        healthbar = true;
+        enabled = false;
+        distance = false;
+        healthbar = false;
         healthtag = false;
 		maxhealthtag = false;
-        nametag = true;
+        nametag = false;
         tracer = false;
-        color = { 0, 0, 255 };
+        color = { 255, 255, 255 };
 		distance_limit = 5000;
     };
 }
@@ -45,10 +45,10 @@ Interface = Lib_ui:CreateWindow({
 	FooterToggle = true;
 	FooterRGB = true;
 	FontColor = { 255, 255, 255 };
-	MainColor = { 32, 26, 68 };
-	BackgroundColor = { 26, 21, 55 };
-	AccentColor = { 81, 37, 112 };
-	OutlineColor = { 54, 47, 90 };
+	MainColor = { 66, 66, 63 };
+	BackgroundColor = { 38, 38, 36 };
+	AccentColor = { 0, 255, 0 };
+	OutlineColor = { 1, 1, 1 };
 })
 
 Tabs = {
