@@ -300,58 +300,46 @@ if _G.IsOnScreen == nil then
 	end
 end
 
-if not Esp_settings.enabled.Value then
-	return
+if Esp_settings.enabled.Value then
+    _G.LiveTask()
 end
 
+
 if _G.LiveTask == nil then
-	_G.LiveTask = function()
-        if Players.enabled.Value or Enemies.enabled.Value then
+    _G.LiveTask = function()
+        if Players.enabled.Value then
             for _, entity in pairs(dx9.GetChildren(Workspace_Live)) do
                 local entityName = dx9.GetName(entity)
-                local entityTab = Enemies
-                local entityConfig = Config.enemies
-                local playerObject = dx9.FindFirstChild(Services.players, entityName)
-                if playerObject and playerObject ~= 0 then
-                    entityTab = Players
-                    entityConfig = Config.players
+                local humanoid = dx9.FindFirstChild(entity, "Humanoid")
+                local health, maxhealth = nil, nil
+                if humanoid and humanoid ~= 0 then
+                    health = dx9.GetHealth(humanoid)
+                    maxhealth = dx9.GetMaxHealth(humanoid)
                 end
-				local humanoid = dx9.FindFirstChild(entity, "Humanoid")
-				local health = nil
-				local maxhealth = nil
-				if humanoid ~= nil and humanoid ~= 0 then
-					health = dx9.GetHealth(humanoid) or nil
-					maxhealth = dx9.GetMaxHealth(humanoid) or nil
-				end
-				if health ~= nil then
-					health = math.floor(health)
-				end
-				if maxhealth ~= nil then
-					maxhealth = math.floor(maxhealth)
-				end
                 local root = dx9.FindFirstChild(entity, "HumanoidRootPart")
                 if root and root ~= 0 then
                     local my_root_pos = dx9.GetPosition(My_root)
                     local root_pos = dx9.GetPosition(root)
                     local root_distance = _G.Get_Distance(my_root_pos, root_pos)
-                    if root_distance < entityTab.distance_limit.Value then
+                    if root_distance < Players.distance_limit.Value then
                         local root_screen_pos = dx9.WorldToScreen({root_pos.x, root_pos.y, root_pos.z})
                         if _G.IsOnScreen(root_screen_pos) then
-							local customName = entityName
-							if entityTab.healthtag.Value and entityTab.maxhealthtag.Value and health ~= nil and maxhealth ~= nil then
-								customName = entityName .. " | " .. tostring(health) .. "/" .. tostring(maxhealth) .. " hp"
-							elseif entityTab.healthtag.Value and health ~= nil then
-								customName = entityName .. " | " .. tostring(health) .. " hp"
-							end
-                        	Lib_esp.draw({
+                            local customName = entityName
+                            if Players.healthtag.Value and health then
+                                customName = entityName .. " | " .. tostring(math.floor(health)) .. " hp"
+                                if Players.maxhealthtag.Value and maxhealth then
+                                    customName = entityName .. " | " .. tostring(math.floor(health)) .. "/" .. tostring(math.floor(maxhealth)) .. " hp"
+                                end
+                            end
+                            Lib_esp.draw({
                                 target = entity;
-                                color = entityTab.color.Value;
-                                healthbar = entityConfig.healthbar;
-                                nametag = entityTab.nametag.Value;
+                                color = Players.color.Value;
+                                healthbar = Config.players.healthbar;
+                                nametag = Players.nametag.Value;
                                 custom_nametag = customName;
-                                distance = entityTab.distance.Value;
+                                distance = Players.distance.Value;
                                 custom_distance = ""..root_distance;
-                                tracer = entityTab.tracer.Value;
+                                tracer = Players.tracer.Value;
                                 tracer_type = Current_tracer_type;
                                 box_type = Current_box_type;
                             })
@@ -360,11 +348,13 @@ if _G.LiveTask == nil then
                 end
             end
         end
-	end
+    end
 end
-if _G.LiveTask then
-	_G.LiveTask()
+
+if Esp_settings.enabled.Value then
+    _G.LiveTask()
 end
+
 
 if _G.NPCTask == nil then
 	_G.NPCTask = function()
