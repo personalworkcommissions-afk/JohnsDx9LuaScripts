@@ -234,7 +234,7 @@ end
 
 Local_player_name = Get_local_player_name()
 
-Workspace_Live = dx9.FindFirstChild(Workspace)
+Workspace_Live = Workspace
 
 if Workspace_Live == nil or Workspace_Live == 0 then
 	return false
@@ -280,11 +280,6 @@ if _G.IsOnScreen == nil then
 	end
 end
 
-if Esp_settings.enabled.Value then
-    _G.LiveTask()
-end
-
-
 if _G.LiveTask == nil then
     _G.LiveTask = function()
         if Players.enabled.Value then
@@ -311,6 +306,7 @@ if _G.LiveTask == nil then
                                     customName = entityName .. " | " .. tostring(math.floor(health)) .. "/" .. tostring(math.floor(maxhealth)) .. " hp"
                                 end
                             end
+							print(entityName)
                             Lib_esp.draw({
                                 target = entity;
                                 color = Players.color.Value;
@@ -331,44 +327,15 @@ if _G.LiveTask == nil then
     end
 end
 
+
 if Esp_settings.enabled.Value then
     _G.LiveTask()
 end
 
-
-if _G.NPCTask == nil then
-	_G.NPCTask = function()
-		if Npcs.enabled.Value then
-            for _, npc in pairs(dx9.GetChildren(Workspace_NPCs)) do
-                local npcName = dx9.GetName(npc)
-                local root = dx9.FindFirstChild(npc, "HumanoidRootPart")
-                if root and root ~= 0 then
-                    local my_root_pos = dx9.GetPosition(My_root)
-                    local root_pos = dx9.GetPosition(root)
-                    local root_distance = _G.Get_Distance(my_root_pos, root_pos)
-                    if root_distance < Npcs.distance_limit.Value then
-                        local root_screen_pos = dx9.WorldToScreen({root_pos.x, root_pos.y, root_pos.z})
-                        if _G._G.IsOnScreen(root_screen_pos) then
-                            Lib_esp.draw({
-                                target = npc;
-                                custom_root = npcName;
-                                color = Npcs.color.Value;
-                                healthbar = false;
-                                nametag = Npcs.nametag.Value;
-                                custom_nametag = npcName;
-                                distance = Npcs.distance.Value;
-                                custom_distance = ""..root_distance;
-                                tracer = Npcs.tracer.Value;
-                                tracer_type = Current_tracer_type;
-                                box_type = Current_box_type;
-                            })
-                        end
-                    end
-                end
-            end
-        end
+while true do
+    if Esp_settings.enabled.Value then
+        _G.LiveTask()
     end
-end
-if _G.NPCTask then
-	_G.NPCTask()
+
+    dx9.Sleep(0.01)
 end
