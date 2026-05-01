@@ -4,7 +4,7 @@ dx9 = dx9 --in VS Code, this gets rid of a ton of problem underlines
 
 Config = _G.Config or {
 	urls = {
-		DXLibUI = "https://raw.githubusercontent.com/Brycki404/DXLibUI/refs/heads/main/main.lua";
+		DXLibUI = "https://raw.githubusercontent.com/personalworkcommissions-afk/JohnsDx9LuaScripts/main/S.lua";
 		LibESP = "https://raw.githubusercontent.com/Brycki404/DXLibESP/refs/heads/main/main.lua";
 	};
     settings = {
@@ -43,7 +43,6 @@ Interface = Lib_ui:CreateWindow({
 	ToggleKey = Config.settings.menu_toggle_keybind;
 
 	FooterToggle = true;
-	FooterRGB = true;
 	FontColor = { 255, 255, 255 };
 	MainColor = { 66, 66, 63 };
 	BackgroundColor = { 38, 38, 36 };
