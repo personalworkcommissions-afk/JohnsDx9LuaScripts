@@ -47,7 +47,7 @@ Interface = Lib_ui:CreateWindow({
 	FontColor = { 255, 255, 255 };
 	MainColor = { 66, 66, 63 };
 	BackgroundColor = { 38, 38, 36 };
-	AccentColor = { 0, 255, 0 };
+	AccentColor = { 255, 0, 0 };
 	OutlineColor = { 1, 1, 1 };
 })
 
