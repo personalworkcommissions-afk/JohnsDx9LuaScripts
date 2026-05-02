@@ -59,14 +59,6 @@ if _G.Lib == nil then
 
         Active = false;
 
-        -- Change later
-        Watermark = { 
-            Text = "";
-            Visible = false;
-            Location = { 150 , 10 };
-            MouseOffset = nil;
-        };
-
         --// Windows
         Windows = {};
         WindowCount = 0;
