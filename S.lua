@@ -59,14 +59,6 @@ if _G.Lib == nil then
 
         Active = false;
 
-        -- Change later
-        Watermark = { 
-            Text = "";
-            Visible = false;
-            Location = { 150 , 10 };
-            MouseOffset = nil;
-        };
-
         --// Windows
         Windows = {};
         WindowCount = 0;
@@ -936,7 +928,7 @@ function Lib:CreateWindow( params ) --// Title, FontColor, MainColor, Background
                 end
 
                 --// Draw Button in Groupbox
-                if Win.CurrentTab ~= nil and Win.CurrentTab == TabName and Win.Active and Groupbox.Visible then
+                if Win.CurrentTab ~= nil and Win.CurrentTab == TdwabName and Win.Active and Groupbox.Visible then
 
                     --// Accounting for \n (to make buttons multiline)
                     local n = 0;
