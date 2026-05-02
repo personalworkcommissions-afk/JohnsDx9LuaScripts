@@ -627,9 +627,6 @@ function Lib:CreateWindow( params ) --// Title, FontColor, MainColor, Background
                 dx9.DrawBox( { Win.Location[1] + 6 , Win.Location[2] + Win.Size[2] - 27 } , { Win.Location[1] + 14 + Watermark_Width , Win.Location[2] + Win.Size[2] - 5 } , Lib.Black ) 
                 dx9.DrawFilledBox( { Win.Location[1] + 7 , Win.Location[2] + Win.Size[2] - 26 } , { Win.Location[1] + 13 + Watermark_Width , Win.Location[2] + Win.Size[2] - 6 } , Win.BackgroundColor ) 
 
-                dx9.DrawString( { Win.Location[1] + 10 , Win.Location[2] + Win.Size[2] - 25 } , Lib.CurrentRainbowColor , Watermark)
-                FooterWidth = FooterWidth + Watermark_Width + 12
-
                 --// Epic Logo
                 local epic = Lib.LogoTick / 10
 
