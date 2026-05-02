@@ -2593,14 +2593,6 @@ do
 end
 
 
---// Logo Tick
-if Lib.LogoTick > 80 then
-    Lib.LogoTick = 0
-else
-    Lib.LogoTick = Lib.LogoTick + 1
-end
-
-
 --// End Statements
 _G.Lib = Lib
 return Lib
