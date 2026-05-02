@@ -334,7 +334,7 @@ function esp.draw(params) -- params = {*Target = model, Color = {r,g,b}, Healthb
 
 			local height = Top.y - Bottom.y
 
-			local width = (height / 2)
+			local width = (height / 3)
 			width = width / 2
 
 			--// Draw Box
