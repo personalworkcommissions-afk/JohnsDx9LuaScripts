@@ -59,14 +59,6 @@ if _G.Lib == nil then
 
         Active = false;
 
-        -- Change later
-        Watermark = { 
-            Text = "";
-            Visible = false;
-            Location = { 150 , 10 };
-            MouseOffset = nil;
-        };
-
         --// Windows
         Windows = {};
         WindowCount = 0;
@@ -618,14 +610,6 @@ function Lib:CreateWindow( params ) --// Title, FontColor, MainColor, Background
 
             --// Footer //--
             if true then 
-
-                --// Watermark //--
-                local Watermark = " "
-                local Watermark_Width = dx9.CalcTextWidth(Watermark)
-
-                dx9.DrawBox( { Win.Location[1] + 5 , Win.Location[2] + Win.Size[2] - 28 } , { Win.Location[1] + 15 + Watermark_Width , Win.Location[2] + Win.Size[2] - 4 } , Win.OutlineColor ) 
-                dx9.DrawBox( { Win.Location[1] + 6 , Win.Location[2] + Win.Size[2] - 27 } , { Win.Location[1] + 14 + Watermark_Width , Win.Location[2] + Win.Size[2] - 5 } , Lib.Black ) 
-                dx9.DrawFilledBox( { Win.Location[1] + 7 , Win.Location[2] + Win.Size[2] - 26 } , { Win.Location[1] + 13 + Watermark_Width , Win.Location[2] + Win.Size[2] - 6 } , Win.BackgroundColor ) 
 
                 --// Epic Logo
                 local epic = Lib.LogoTick / 10
