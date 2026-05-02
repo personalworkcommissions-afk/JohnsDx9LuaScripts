@@ -335,7 +335,7 @@ function esp.draw(params) -- params = {*Target = model, Color = {r,g,b}, Healthb
 			local height = Top.y - Bottom.y
 
 			local width = (height / 2)
-			width = width / 1.2
+			width = width / 1.7
 
 			--// Draw Box
 			if box_type == 1 then --// cormers
@@ -357,28 +357,29 @@ function esp.draw(params) -- params = {*Target = model, Color = {r,g,b}, Healthb
 			end
 
 			if healthbar then
-				if dx9.FindFirstChild(target, "Humanoid") then
-					local tl = { Top.x + width - 5, Top.y + 1 }
-					local br = { Top.x + width - 1, Bottom.y - 1 }
+    local humanoid = dx9.FindFirstChild(target, "Humanoid")
 
-					local humanoid = dx9.FindFirstChild(target, "Humanoid")
-					local hp = dx9.GetHealth(humanoid)
-					local maxhp = dx9.GetMaxHealth(humanoid)
+    if humanoid then
+        local hp = dx9.GetHealth(humanoid) or 0
+        local maxhp = dx9.GetMaxHealth(humanoid) or 1
 
-					--// A lot of math stuff, dont mess with it unless u know what ur doing
-					local addon = ((height + 2) / (maxhp / math.max(0, math.min(maxhp, hp))))
+        if maxhp <= 0 then maxhp = 1 end
+        if hp < 0 then hp = 0 end
+        if hp > maxhp then hp = maxhp end
 
-					dx9.DrawBox({ tl[1] - 1, tl[2] - 1 }, { br[1] + 1, br[2] + 1 }, box_color) -- Outer
-					dx9.DrawFilledBox({ tl[1], tl[2] }, { br[1], br[2] }, { 0, 0, 0 }) -- Inner Black
-					dx9.DrawFilledBox(
-						{ tl[1] + 1, br[2] - 1 },
-						{ br[1] - 1, (br[2] + addon + 1) },
-						{ 255 - 255 / (maxhp / hp), 255 / (maxhp / hp), 0 }
-					) -- Inner
-				else
-					error("[Error] BoxESP: Target has no humanoid, healthbar not added")
-				end
-			end
+        local ratio = hp / maxhp
+        local addon = (height + 2) * ratio
+
+        dx9.DrawBox({ tl[1] - 1, tl[2] - 1 }, { br[1] + 1, br[2] + 1 }, box_color)
+        dx9.DrawFilledBox({ tl[1], tl[2] }, { br[1], br[2] }, { 0, 0, 0 })
+
+        dx9.DrawFilledBox(
+            { tl[1] + 1, br[2] - 1 },
+            { br[1] - 1, br[2] - addon },
+            { 255 * (1 - ratio), 255 * ratio, 0 }
+        )
+    end
+end
 
 			if distance then
 				local dist = custom_distance or "" .. get_distance(torso)
