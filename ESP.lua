@@ -332,11 +332,8 @@ function esp.draw(params) -- params = {*Target = model, Color = {r,g,b}, Healthb
 			local Top = dx9.WorldToScreen({ torso.x, HeadPosY, torso.z })
 			local Bottom = dx9.WorldToScreen({ torso.x, LegPosY, torso.z })
 
-			local right = dx9.WorldToScreen({ torso.x + 1.5, torso.y, torso.z })
-local left = dx9.WorldToScreen({ torso.x - 1.5, torso.y, torso.z })
-
-local width = math.abs(right.x - left.x) / 2
-local height = math.abs(Top.y - Bottom.y)
+			local height = math.abs(Top.y - Bottom.y)
+local width = height / 4
 
 			--// Draw Box
 			if box_type == 1 then --// cormers
