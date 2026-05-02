@@ -55,6 +55,7 @@ if _G.Lib == nil then
 
         RainbowHue = 0; 
         CurrentRainbowColor = { 0 , 0 , 0 }; 
+        LogoTick = 0;
 
         Active = false;
 
@@ -2590,6 +2591,14 @@ do
     elseif Lib.RainbowHue <= 1530 then
         Lib.CurrentRainbowColor = {255, 0, 1530 - Lib.RainbowHue}
     end
+end
+
+
+--// Logo Tick
+if Lib.LogoTick > 80 then
+    Lib.LogoTick = 0
+else
+    Lib.LogoTick = Lib.LogoTick + 1
 end
 
 
