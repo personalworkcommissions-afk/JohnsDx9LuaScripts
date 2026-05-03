@@ -235,9 +235,9 @@ function esp.draw(params) -- params = {*Target = model, Color = {r,g,b}, Healthb
 	local tracertype = params.tracer_type or 1 --// 1 = near-bottom, 2 = bottom, 3 = top, 4 = Mouse
 	local box_type = params.box_type or 1 --// 1 = corners, 2 = 2d box, 3 = 3d box
 	local box_color = params.color or {255,255,255}
-local name_color = params.name_color or box_color
-local distance_color = params.distance_color or box_color
-local tracer_color = params.tracer_color or box_color
+local name_color = params.name_color
+local distance_color = params.distance_color
+local tracer_color = params.tracer_color
 
 	--// Error Handling
 	assert(
