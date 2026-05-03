@@ -408,7 +408,7 @@ end
 
 			if distance then
 				local dist = custom_distance or (tostring(get_distance(torso)) .. "m")
-				dx9.DrawString({ Bottom.x - (dx9.CalcTextWidth(dist) / 2), Bottom.y }, box_color, dist)
+				dx9.DrawString({ Bottom.x - (dx9.CalcTextWidth(dist) / 2), Bottom.y }, distance_color, dist)
 			end
 
 			if nametag then
@@ -418,7 +418,7 @@ end
 					name = custom_nametag
 				end
 
-				dx9.DrawString({ Top.x - (dx9.CalcTextWidth(name) / 2), Top.y - 20 }, box_color, name)
+				dx9.DrawString({ Top.x - (dx9.CalcTextWidth(name) / 2), Top.y - 20 }, name_color, name)
 			end
 
             if params.teamname then
