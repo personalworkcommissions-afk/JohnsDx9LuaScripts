@@ -370,7 +370,7 @@ function esp.draw(params) -- params = {*Target = model, Color = {r,g,b}, Healthb
         local ratio = hp / maxhp
 
         local barHeight = math.abs(Bottom.y - Top.y)
-        local barWidth = 4
+        local barWidth = 2
 
         local x1 = Bottom.x - width - 8
         local y1 = Top.y
