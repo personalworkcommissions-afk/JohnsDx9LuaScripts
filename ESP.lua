@@ -224,7 +224,6 @@ end
 function esp.draw(params) -- params = {*Target = model, Color = {r,g,b}, Healthbar = false, Distance = false, Nametag = false, Tracer = false, TracerType = 1, BoxType = 1}
 	local target = params.target or nil
 	local esp_type = params.esp_type or nil
-	local box_color = params.color or { 255, 255, 255 }
 	local healthbar = params.healthbar or false
 	local distance = params.distance or false
 	local nametag = params.nametag or false
@@ -235,6 +234,10 @@ function esp.draw(params) -- params = {*Target = model, Color = {r,g,b}, Healthb
 	local tracer = params.tracer or false
 	local tracertype = params.tracer_type or 1 --// 1 = near-bottom, 2 = bottom, 3 = top, 4 = Mouse
 	local box_type = params.box_type or 1 --// 1 = corners, 2 = 2d box, 3 = 3d box
+	local box_color = params.color or {255,255,255}
+local name_color = params.name_color or box_color
+local distance_color = params.distance_color or box_color
+local tracer_color = params.tracer_color or box_color
 
 	--// Error Handling
 	assert(
@@ -297,12 +300,12 @@ function esp.draw(params) -- params = {*Target = model, Color = {r,g,b}, Healthb
 		if nametag and custom_nametag then
 			local name = custom_nametag
 
-			dx9.DrawString({ Top.x - (dx9.CalcTextWidth(name) / 2), Top.y - 20 }, box_color, name)
+			dx9.DrawString({ Top.x - (dx9.CalcTextWidth(name) / 2), Top.y - 20 }, name_color, name)
 		end
 
 		if distance then
 			local dist = custom_distance or "" .. get_distance(position)
-			dx9.DrawString({ Bottom.x - (dx9.CalcTextWidth(dist) / 2), Bottom.y }, box_color, dist)
+			dx9.DrawString({ Bottom.x - (dx9.CalcTextWidth(dist) / 2), Bottom.y }, distance_color, dist)
 		end
 
 		if tracer then
@@ -452,7 +455,7 @@ end
 					dx9.DrawLine(
 						loc,
 						{ Top.x + width + (((Bottom.x - width) - (Top.x + width)) / 2), Bottom.y },
-						box_color
+						tracer_color
 					)
 				end
 			end
