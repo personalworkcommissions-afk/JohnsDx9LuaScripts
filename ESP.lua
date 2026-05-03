@@ -359,23 +359,45 @@ function esp.draw(params) -- params = {*Target = model, Color = {r,g,b}, Healthb
 			if healthbar then
     local humanoid = dx9.FindFirstChild(target, "Humanoid")
 
-    if humanoid then
+    if humanoid and humanoid ~= 0 then
         local hp = dx9.GetHealth(humanoid) or 0
-        local maxhp = dx9.GetMaxHealth(humanoid) or 1
+        local maxhp = dx9.GetMaxHealth(humanoid) or 100
 
-        if maxhp <= 0 then maxhp = 1 end
-        if hp < 0 then hp = 0 end
-        if hp > maxhp then hp = maxhp end
+        if maxhp <= 0 then
+            maxhp = 1
+        end
 
         local ratio = hp / maxhp
-        local addon = (height + 2) * ratio
 
-        dx9.DrawBox({ tl[1] - 1, tl[2] - 1 }, { br[1] + 1, br[2] + 1 }, box_color)
-        dx9.DrawFilledBox({ tl[1], tl[2] }, { br[1], br[2] }, { 0, 0, 0 })
+        local barHeight = math.abs(Bottom.y - Top.y)
+        local barWidth = 4
 
+        local x1 = Bottom.x - width - 8
+        local y1 = Top.y
+
+        local x2 = x1 + barWidth
+        local y2 = Bottom.y
+
+        local filledY = y2 - (barHeight * ratio)
+
+        -- outline
+        dx9.DrawBox(
+            { x1 - 1, y1 - 1 },
+            { x2 + 1, y2 + 1 },
+            { 0, 0, 0 }
+        )
+
+        -- background
         dx9.DrawFilledBox(
-            { tl[1] + 1, br[2] - 1 },
-            { br[1] - 1, br[2] - addon },
+            { x1, y1 },
+            { x2, y2 },
+            { 40, 40, 40 }
+        )
+
+        -- health fill
+        dx9.DrawFilledBox(
+            { x1, filledY },
+            { x2, y2 },
             { 255 * (1 - ratio), 255 * ratio, 0 }
         )
     end
