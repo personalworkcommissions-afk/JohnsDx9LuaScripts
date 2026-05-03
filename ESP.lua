@@ -382,7 +382,7 @@ function esp.draw(params) -- params = {*Target = model, Color = {r,g,b}, Healthb
 end
 
 			if distance then
-				local dist = custom_distance or "" .. get_distance(torso)
+				local dist = custom_distance or (tostring(get_distance(torso)) .. "m")
 				dx9.DrawString({ Bottom.x - (dx9.CalcTextWidth(dist) / 2), Bottom.y }, box_color, dist)
 			end
 
