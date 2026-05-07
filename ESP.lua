@@ -376,7 +376,7 @@ local tracer_color = params.tracer_color or box_color
         local barHeight = math.abs(Bottom.y - Top.y)
         local barWidth = 2
 
-        local x1 = Bottom.x - width - 8
+        local x1 = Bottom.x - width - 6
         local y1 = Top.y
 
         local x2 = x1 + barWidth
