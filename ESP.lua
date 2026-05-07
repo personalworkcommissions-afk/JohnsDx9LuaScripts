@@ -339,7 +339,7 @@ local tracer_color = params.tracer_color or box_color
 			local height = Top.y - Bottom.y
 
 			local width = (height / 2)
-			width = width / 5
+			width = width / 1.2
 
 			--// Draw Box
 			if box_type == 1 then --// cormers
